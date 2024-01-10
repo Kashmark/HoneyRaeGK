@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { TicketList } from "./components/tickets/TicketList.js";
+import { Routes, Route, Outlet } from "react-router-dom";
+import { NavBar } from "./components/nav/NavBar.js";
+import { CustomerList } from "./components/Customers/CustomerList.js";
+import { EmployeeList } from "./components/Employees/EmployeeList.js";
+import { Welcome } from "./components/Welcome/Welcome.js";
+import { CustomerDetails } from "./components/Customers/CustomerDetails.js";
 
-function App() {
+export const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <>
+            <NavBar />
+            <Outlet />
+          </>
+        }
+      >
+        <Route index element={<Welcome />} />
+        <Route path="tickets" element={<TicketList />} />
+        <Route path="employees" element={<EmployeeList />} />
+        <Route path="customers">
+          <Route index element={<CustomerList />} />
+          <Route path=":customerId" element={<CustomerDetails />} />{" "}
+        </Route>
+      </Route>
+    </Routes>
   );
-}
-
-export default App;
+};
