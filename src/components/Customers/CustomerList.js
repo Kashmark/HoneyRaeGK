@@ -12,6 +12,7 @@ export const CustomerList = () => {
       setCustomers(customerArray);
     });
   }, []);
+
   return (
     <div className="customers">
       {customers.map((customerObj) => {
